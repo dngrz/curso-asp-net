@@ -41,5 +41,29 @@ namespace ADO.DAL
             return productos;
         }
 
+        public Product VerDetalle (int IDProducto)
+        {
+            Product product = new Product();
+
+            using (var con = new SqlConnection(cc))
+            {
+                SqlCommand command = new SqlCommand("VerProducto", con);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@aiProductID", IDProducto);
+
+                con.Open();
+
+                using (var dr = command.ExecuteReader())
+                {
+                    if (dr.Read()){
+                        product.ProductID = Convert.ToInt32(dr["ProductID"]);
+                        product.Name = dr["Name"].ToString();
+                        product.ListPrice = Convert.ToDecimal(dr["ListPrice"]);
+                    }
+                }
+            }
+            
+            return product;
+        }
     }
 }

@@ -16,5 +16,12 @@ namespace ADO.BL
         {
             return await productDAL.Listar();
         }
+
+        public Product VerDetalle (int IDProducto)
+        {
+            Product product = new Product();
+            product = productDAL.VerDetalle(IDProducto);
+            return product;
+        }
     }
 }
