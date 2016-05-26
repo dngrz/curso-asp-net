@@ -34,5 +34,35 @@ namespace ADO.ClienteMVC.Controllers
             }
             return View(product);
         }
+
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Product product = productBL.VerDetalle(Convert.ToInt32(id));
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+            return View(product);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include ="ProductID,Name,ListPrice")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                bool proceso = productBL.EditarProducto(product);
+                if (proceso)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(product);
+        }
     }
 }

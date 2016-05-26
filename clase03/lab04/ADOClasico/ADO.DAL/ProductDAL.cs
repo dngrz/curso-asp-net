@@ -65,5 +65,29 @@ namespace ADO.DAL
             
             return product;
         }
+
+        public bool EditarProducto(Product product)
+        {
+            bool resultadoProceso = false;
+
+            using (var con = new SqlConnection(cc))
+            {
+                SqlCommand command = new SqlCommand("ActualizarProducto", con);
+                command.CommandType = CommandType.StoredProcedure;
+                command.Parameters.AddWithValue("@aiProductID", product.ProductID);
+                command.Parameters.AddWithValue("@asNombreProducto", product.Name);
+                command.Parameters.AddWithValue("@anPrecioProducto", product.ListPrice);
+
+                con.Open();
+
+                int cproceso = Convert.ToInt32(command.ExecuteNonQuery());
+                if (cproceso > 0)
+                {
+                    resultadoProceso = true;
+                }
+                
+            }
+            return resultadoProceso;
+        }
     }
 }

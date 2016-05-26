@@ -23,5 +23,11 @@ namespace ADO.BL
             product = productDAL.VerDetalle(IDProducto);
             return product;
         }
+
+        public bool EditarProducto(Product product)
+        {            
+            return productDAL.EditarProducto(product);
+        }
+
     }
 }
