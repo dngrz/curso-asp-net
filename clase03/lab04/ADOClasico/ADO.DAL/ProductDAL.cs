@@ -81,6 +81,7 @@ namespace ADO.DAL
                 con.Open();
 
                 int cproceso = Convert.ToInt32(command.ExecuteNonQuery());
+                //SET NOCOUNT ON;
                 if (cproceso > 0)
                 {
                     resultadoProceso = true;
