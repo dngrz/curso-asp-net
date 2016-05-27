@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using EFWeb.Models;
+using System.Net;
+
 namespace EFWeb.Controllers
 {
     public class CategoriesController : Controller
@@ -18,9 +20,20 @@ namespace EFWeb.Controllers
         }
 
         // GET: Categories/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            Category category = db.categories.Find(id);
+            if(category == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(category);
         }
 
         // GET: Categories/Create
