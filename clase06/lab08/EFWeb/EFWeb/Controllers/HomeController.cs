@@ -22,5 +22,11 @@ namespace EFWeb.Controllers
         {
             return View();
         }
+
+        public ActionResult Imagen()
+        {
+            return View();
+        }
+
     }
 }
