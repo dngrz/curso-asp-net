@@ -23,6 +23,19 @@ namespace EFWeb
                 }
             );
 
+            routes.MapRoute(
+                name: "ByIdentifier",
+                url: "Categorias/{id}",
+                defaults: new
+                {
+                    controller = "Categories",
+                    action = "Details"
+                },
+                constraints: new {
+                    id = "[0-9]+"
+                }
+            );
+
             //Definiendo el Routing por defecto para la aplicacion
             routes.MapRoute(
                 name: "Default",
