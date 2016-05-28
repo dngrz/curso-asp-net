@@ -36,14 +36,25 @@ namespace EFWeb
                 }
             );
 
-            //Definiendo el Routing por defecto para la aplicacion
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new {
+                    controller = "Home",
+                    action = "Login",
+                    id = UrlParameter.Optional }
+            );
+
+            //Definiendo el Routing por defecto para la aplicacion
+            routes.MapRoute(
+                name: "CategoriesIndex",
+                url: "{controller}/{action}/{id}",
+                defaults: new
+                {
                     controller = "Categories",
                     action = "Index",
-                    id = UrlParameter.Optional }
+                    id = UrlParameter.Optional
+                }
             );
         }
     }
