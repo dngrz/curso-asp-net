@@ -14,9 +14,23 @@ namespace EFWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "ByDescription",
+                url: "Busquedas/Directas/{description}",
+                defaults: new
+                {
+                    controller = "Categories",
+                    action = "DetailsByDescription"
+                }
+            );
+
+            //Definiendo el Routing por defecto para la aplicacion
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Categories", action = "Index", id = UrlParameter.Optional }
+                defaults: new {
+                    controller = "Categories",
+                    action = "Index",
+                    id = UrlParameter.Optional }
             );
         }
     }

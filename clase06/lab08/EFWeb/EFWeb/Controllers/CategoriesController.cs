@@ -36,6 +36,20 @@ namespace EFWeb.Controllers
             return View(category);
         }
 
+        public ActionResult DetailsByDescription(string description)
+        {
+            Category category = (Category)
+                (from c in db.categories
+                 where c.description == description
+                 select c).FirstOrDefault();
+            //verificando si el objeto está vacio.
+            if(category == null)
+            {
+                return HttpNotFound();
+            }
+            return View("Details", category);
+        }
+
         // GET: Categories/Create
         public ActionResult Create()
         {
