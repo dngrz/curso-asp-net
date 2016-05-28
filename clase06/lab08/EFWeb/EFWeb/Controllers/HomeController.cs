@@ -18,6 +18,9 @@ namespace EFWeb.Controllers
         {
             return View();
         }
-
+        public ActionResult Panel()
+        {
+            return View();
+        }
     }
 }
