@@ -1,0 +1,97 @@
+﻿@model IEnumerable <EFWeb.Models.Category>
+
+@{
+    ViewBag.Title = "Listado de Categorias";
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+//desactivar el almacenamiento de datos en el cliente.
+        $.ajaxSetup( { cache: false } );
+// configurando el mecanismo para visualizar popups
+// parametro implicito, otro proceso pasa el parametro no el actual.
+// parametro explicito, cuando se llame a la funcion tiene que proporcionarlo.
+// e es un parametro implicito de la funcion en este caso representa la vista que se desea mostrar como popup.
+        $(".viewDialog").on("click", function (e) {
+//capturando la url generada, this representa el objeto actual, en este caso del a.
+            var url = $(this).attr('href');
+//Levantar el DIV como Popup con la funcion Dialog de jQuery. El DIV contendrá la vista que traemos al invocar la Acción
+            $("#dialog-view").dialog({
+                title: 'Detalle',
+                autoOpen: false,
+                resizable: false,
+                height: 350,
+                width: 350,
+                show: { effect: 'drop', direction: 'up' },
+                modal: true,
+                draggable: true,
+                open: function (event, ui) {
+                    $(this).load(url);
+                }
+            });
+            //confirmando la llamada al div
+            $("#dialog-view").dialog('open');
+            return false;
+        });
+    });
+
+</script>
+
+<h2>Listado de Categorias</h2>
+<p>
+    @Html.ActionLink("Nuevo Registro", "Create")
+</p>
+
+<table>
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.description)</th>
+        <th>@Html.DisplayNameFor(model => model.salesContact)</th>
+        <th>@Html.DisplayNameFor(model => model.salesNumbers)</th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.description)</td>
+            <td>@Html.DisplayFor(modelItem => item.salesContact)</td>
+            <td>@Html.DisplayFor(modelItem => item.salesNumbers)</td>
+            <td>@Html.ActionLink("Ver Detalle",
+               "Details",
+               new { id = item.categoryID }, new {@class= "viewDialog" })</td>
+            <td>
+                <button type="button" class="btn btn-info btn-sm" 
+                        data-toggle="modal"
+                        data-target="#panelBusqueda">
+                    Activar Busqueda
+                </button>
+            </td>
+        </tr>
+    }
+</table>
+
+<div id="panelBusqueda" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Titulo Busqueda Modal</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Partial("_Busqueda")
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
+                    Cerrar Ventana
+                </button>
+            </div>
+        </div>
+    </div>    
+</div>
+
+<div id="dialog-view" style="display:none">
+    
+</div>
