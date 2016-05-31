@@ -138,6 +138,7 @@
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Panel.cshtml" />
     <Content Include="Views\Home\Imagen.cshtml" />
+    <Content Include="Views\Categories\_Busqueda.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

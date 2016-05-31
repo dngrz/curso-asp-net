@@ -1,0 +1,7 @@
+Tipos de vista
+
+Vista tipada:
+ - Tiene un Objeto Model.
+
+Vista Vacia
+ - No tiene Nada.

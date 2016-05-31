@@ -40,8 +40,8 @@ namespace EFWeb
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new {
-                    controller = "Home",
-                    action = "Login",
+                    controller = "Categories",
+                    action = "Index",
                     id = UrlParameter.Optional }
             );
 

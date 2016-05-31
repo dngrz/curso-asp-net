@@ -113,5 +113,11 @@ namespace EFWeb.Controllers
                 return View();
             }
         }
+
+        public PartialViewResult _Busqueda()
+        {
+            return PartialView();
+        }
+
     }
 }
