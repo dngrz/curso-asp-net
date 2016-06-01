@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using EFWeb.Models;
 using System.Net;
+using System.Web.UI;
 
 namespace EFWeb.Controllers
 {
@@ -13,7 +14,9 @@ namespace EFWeb.Controllers
         // Creando la instancia del administrador de entidades locales
         private CategoryBD db = new CategoryBD();
 
-        // GET: Categories
+        [OutputCache(Duration = 300, 
+            Location = OutputCacheLocation.Server,
+            VaryByParam = "none")]
         public ActionResult Index()
         {
             return View(db.categories.ToList());
